@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/64c4083e41.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <div class=" loginContainer">
+        <div class="form-Box">
+            <h1 id="title"> SIGN UP</h1>
+            <form>
+                <div class="input-Grp">
+
+                    <div class="input-field" id="nameField">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" placeholder="Name">
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email">
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password">
+                    </div>
+                    <p id="forget" class="hidden">Forgot Password <a href="">click here!</a></p>
+                </div>
+                <div class="btn-field">
+                    <button type="button" id="sigupBtn">SIGN UP</button>
+                    <button type="button" id="siginBtn" class="disable">SIGN IN</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        let sigupBtn= document.getElementById("sigupBtn");
+        let siginBtn= document.getElementById("siginBtn");
+        let nameField= document.getElementById("nameField");
+        let title= document.getElementById("title");
+        let forget=document.getElementById("forget");
+        siginBtn.onclick=function(){
+            nameField.style.maxHeight="0";
+            title.innerHTML="SIGN IN";
+            sigupBtn.classList.add("disable");
+            siginBtn.classList.remove("disable"); 
+        }
+        sigupBtn.onclick=function(){
+            nameField.style.maxHeight="60px";
+            title.innerHTML="SIGN UP";
+            sigupBtn.classList.remove("disable");
+            siginBtn.classList.add("disable");
+            forget.i
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Jewelry Design</title>
+    <link rel="stylesheet" href="custom.css">
+    <link rel="shortcut icon" href="Icon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+<body class="customBody">
+    <header class="customHeader">
+        <h1>Custom Jewelry Design</h1>
+        <p>Design your dream jewelry with YAQUT!</p>
+    </header>
+
+    <section id="custom-design-form">
+        <h2>Submit Your Custom Design Request</h2>
+        <form id="designForm">
+            <div class="form-group">
+                <label for="jewelry-type">Type of Jewelry</label>
+                <select id="jewelry-type" name="jewelry-type" required>
+                    <option value="">Select type</option>
+                    <option value="ring">Ring</option>
+                    <option value="necklace">Necklace</option>
+                    <option value="bracelet">Bracelet</option>
+                    <option value="earrings">Earrings</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="materials">Materials</label>
+                <input type="text" id="materials" name="materials" placeholder="e.g., Gold, Silver,..." required>
+            </div>
+            <div class="form-group">
+                <label for="gemstones">Gemstones</label>
+                <select id="gemstones" name="gemstones" required>
+                    <option value="">Select gemstones</option>
+                    <option value="none">None</option>
+                    <option value="diamond">Diamond</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="sapphire">Sapphire</option>
+                    <option value="emerald">Emerald</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="design-details">Design Details</label>
+                <textarea id="design-details" name="design-details" rows="5" placeholder="Describe your order..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Your Phone</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="validateForm(event)">Submit Design Request</button>
+            </div>
+        </form>
+    </section>
+
+    <!--footer section starts-->
+    <footer>
+        <div class="footer_part">
+                <div class="footerSocials">
+                    <a href="https://www.instagram.com/yaqutjewelry/" ><img class="social-icons" src="instagram (1).png" alt="instagram icon"></a>
+                    <a href="https://wa.me/+96181992064"><img class="social-icons" src="whatsapp.png" alt="whatsapp icon"></a>
+                </div>
+                <div class="footerNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="contact_us.html">Contact Us</a></li>
+                    <li><a href="">Our Story</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                 </ul>
+                </div>
+                <div class="footerBottom">
+                    <p>Copyright &copy;2024 Designed by <span class="designer">Jana & Bilal</span></p>
+                </div>
+            </div>
+    </footer> 
+    <!--footer section ends-->
+
+    <script>
+        function submit() {
+            const form = document.getElementById('designForm');
+            const formData = new FormData(form);
+    
+            formData.forEach((value, key) => {
+                localStorage.setItem(key, value);
+            });
+    
+            window.location.href = 'DesignConfirmation.html';
+        }
+        
+        function validateForm(event) {
+            const form = document.getElementById('designForm');
+
+            // Prevent default form submission
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                alert('Please fill out all required fields correctly.');
+                return false; 
+            }
+            // Calling the function 
+            submit();
+        }
+    </script>
+</body>
+</html>

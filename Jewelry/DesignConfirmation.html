@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Confirmation</title>
+    <link rel="stylesheet" href="custom.css">
+    <link rel="shortcut icon" href="Images/Icon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Design Confirmation</h1>
+        <p>Thank you for your custom jewelry design request!</p>
+    </header>
+
+    <section id="confirmation-details">
+        <h2>Your Design Details</h2>
+        <p id="jewelry-type"></p>
+        <p id="materials"></p>
+        <p id="gemstones"></p>
+        <p id="design-details"></p>
+        <p id="name"></p>
+        <p id="email"></p>
+        <p id="phone"></p>
+        <h3>Estimated Delivery</h3>
+        <p id="delivery-date"></p>
+    </section>
+
+    <!--footer section starts-->
+    <footer>
+        <div class="footer_part">
+                <div class="footerSocials">
+                    <a href="https://www.instagram.com/yaqutjewelry/" ><img class="social-icons" src="Images/instagram (1).png" alt="instagram icon"></a>
+                    <a href="https://wa.me/+96181992064"><img class="social-icons" src="Images/whatsapp.png" alt="whatsapp icon"></a>
+                </div>
+                <div class="footerNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="contact_us.html">Contact Us</a></li>
+                    <li><a href="">Our Story</a></li>
+                    <li><a href="policy.html">Privacy Policy</a></li>
+                 </ul>
+                </div>
+                <div class="footerBottom">
+                    <p>Copyright &copy;2024 Designed by <span class="designer">Jana & Bilal</span></p>
+                </div>
+            </div>
+    </footer> 
+    <!--footer section ends-->
+
+    <script>
+        function getLocalStorageItem(item) {
+            return localStorage.getItem(item) || '';
+        }
+
+        document.getElementById('jewelry-type').innerText = 'Type of Jewelry: ' + getLocalStorageItem('jewelry-type');
+        document.getElementById('materials').innerText = 'Materials: ' + getLocalStorageItem('materials');
+        document.getElementById('gemstones').innerText = 'Gemstones: ' + getLocalStorageItem('gemstones');
+        document.getElementById('design-details').innerText = 'Design Details: ' + getLocalStorageItem('design-details');
+        document.getElementById('name').innerText = 'Name: ' + getLocalStorageItem('name');
+        document.getElementById('email').innerText = 'Email: ' + getLocalStorageItem('email');
+        document.getElementById('phone').innerText = 'Phone: ' + getLocalStorageItem('phone');
+
+        const currentDate = new Date();
+        const deliveryDate = new Date(currentDate);
+        deliveryDate.setDate(currentDate.getDate() + 14);
+        document.getElementById('delivery-date').innerText = 'Your jewelry will be delivered by: ' + deliveryDate.toDateString();
+    </script>
+</body>
+</html>
