@@ -3,59 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOGIN</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/64c4083e41.js" crossorigin="anonymous"></script>
-    
 </head>
 <body>
-    <div class=" loginContainer">
+    <div class="loginContainer">
         <div class="form-Box">
-            <h1 id="title"> SIGN UP</h1>
-            <form>
+            <h1 id="title">SIGN UP</h1>
+            <form id="auth-form" onsubmit="return false;">
                 <div class="input-Grp">
-
                     <div class="input-field" id="nameField">
                         <i class="fa-solid fa-user"></i>
-                        <input type="text" placeholder="Name">
+                        <input type="text" id="name" placeholder="Name">
                     </div>
 
                     <div class="input-field">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" placeholder="Email">
+                        <input type="email" id="email" placeholder="Email">
                     </div>
 
                     <div class="input-field">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Password">
+                        <input type="password" id="password" placeholder="Password">
                     </div>
-                    <p id="forget" class="hidden">Forgot Password <a href="">click here!</a></p>
+
+                    <p id="forget" class="hidden">Forgot Password? <a href="#">Click here!</a></p>
                 </div>
                 <div class="btn-field">
-                    <button type="button" id="sigupBtn">SIGN UP</button>
-                    <button type="button" id="siginBtn" class="disable">SIGN IN</button>
+                    <button type="button" id="signupBtn">SIGN UP</button>
+                    <button type="button" id="signinBtn" class="disable">SIGN IN</button>
                 </div>
             </form>
         </div>
     </div>
+
     <script>
-        let sigupBtn= document.getElementById("sigupBtn");
-        let siginBtn= document.getElementById("siginBtn");
-        let nameField= document.getElementById("nameField");
-        let title= document.getElementById("title");
-        let forget=document.getElementById("forget");
-        siginBtn.onclick=function(){
-            nameField.style.maxHeight="0";
-            title.innerHTML="SIGN IN";
-            sigupBtn.classList.add("disable");
-            siginBtn.classList.remove("disable"); 
+        // DOM Elements
+        const signupBtn = document.getElementById("signupBtn");
+        const signinBtn = document.getElementById("signinBtn");
+        const nameField = document.getElementById("nameField");
+        const title = document.getElementById("title");
+        const forget = document.getElementById("forget");
+        const nameInput = document.getElementById("name");
+        const emailField = document.getElementById("email");
+        const passwordField = document.getElementById("password");
+
+        // Utility functions to validate input
+        function isEmailValid(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
         }
-        sigupBtn.onclick=function(){
-            nameField.style.maxHeight="60px";
-            title.innerHTML="SIGN UP";
-            sigupBtn.classList.remove("disable");
-            siginBtn.classList.add("disable");
-            forget.i
+
+        function isPasswordValid(password) {
+            return password.length >= 6; // Minimum 6 characters
+        }
+
+        // Function: Switch to Sign In
+        function switchToSignIn() {
+            nameField.style.maxHeight = "0"; // Hide the name field
+            title.innerHTML = "SIGN IN"; // Change the title
+            signupBtn.classList.add("disable"); // Disable the Sign Up button
+            signinBtn.classList.remove("disable"); // Enable the Sign In button
+            forget.classList.remove("hidden"); // Show "Forgot Password" link
+        }
+
+        // Function: Switch to Sign Up
+        function switchToSignUp() {
+            nameField.style.maxHeight = "60px"; // Show the name field
+            title.innerHTML = "SIGN UP"; // Change the title
+            signupBtn.classList.remove("disable"); // Enable the Sign Up button
+            signinBtn.classList.add("disable"); // Disable the Sign In button
+            forget.classList.add("hidden"); // Hide "Forgot Password" link
+        }
+
+        // Event Listeners for Switching Modes
+        signupBtn.addEventListener("click", function () {
+            if (title.innerHTML === "SIGN IN") {
+                switchToSignUp(); // Switch to Sign Up mode
+            } else {
+                handleSignUp(); // Handle Sign Up process
+            }
+        });
+
+        signinBtn.addEventListener("click", function () {
+            if (title.innerHTML === "SIGN UP") {
+                switchToSignIn(); // Switch to Sign In mode
+            } else {
+                handleSignIn(); // Handle Sign In process
+            }
+        });
+
+        // Function: Handle Sign Up
+        function handleSignUp() {
+            const name = nameInput.value.trim();
+            const email = emailField.value.trim();
+            const password = passwordField.value.trim();
+
+            if (!name) {
+                alert("Please enter your name.");
+                return;
+            }
+
+            if (!isEmailValid(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!isPasswordValid(password)) {
+                alert("Password must be at least 6 characters long.");
+                return;
+            }
+
+            // Save user session info in localStorage
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userEmail", email);
+
+            // Smooth redirection to index.html
+            window.location.href = "index.html";
+        }
+
+        // Function: Handle Sign In
+        function handleSignIn() {
+            const email = emailField.value.trim();
+            const password = passwordField.value.trim();
+
+            if (!isEmailValid(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!isPasswordValid(password)) {
+                alert("Password must be at least 6 characters long.");
+                return;
+            }
+
+            // Save user session info in localStorage
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userEmail", email);
+
+            // Smooth redirection to index.html
+            window.location.href = "index.html";
         }
     </script>
 </body>

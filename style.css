@@ -500,7 +500,9 @@ form p a{
     background:#eaeaea;
     color: #555;
 }
-
+.hidden {
+    display: none;
+}
 
 /********add to Cart *********/
 .add-to-cart-btn {

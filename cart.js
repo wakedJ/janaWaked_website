@@ -1,6 +1,65 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Cart functionality
     const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    
+    const checkoutButton = document.getElementById('checkout-btn');
+    const clearCartButton = document.getElementById('clear-cart-btn');
+    const checkoutForm = document.getElementById('checkout-form');
+
+    // Proceed to checkout (check if cart is empty)
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', () => {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if the cart is empty
+            if (cart.length === 0) {
+                alert("Your cart is empty. Please add items before proceeding to checkout.");
+            } else {
+                window.location.href = 'checkout.html'; // Redirect to checkout page
+            }
+        });
+    }
+
+    // Clear cart
+    if (clearCartButton) {
+        clearCartButton.addEventListener('click', () => {
+            clearCart();
+            updateCartDisplay();
+        });
+    }
+
+    // Checkout form submission
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', (event) => {
+            event.preventDefault();  // Prevent the default form submission (page reload)
+            
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const payment = document.querySelector('input[name="payment"]:checked')?.value; // Get the selected payment method
+            const phone = document.getElementById('phone').value;
+            const requests = document.getElementById('requests').value;
+
+            // Check if all required fields are filled
+            if (name && address && payment && phone) {
+                // Log the order details
+                console.log('Order Details:');
+                console.log(`Name: ${name}`);
+                console.log(`Address: ${address}`);
+                console.log(`Payment: ${payment}`);
+                console.log(`Phone: ${phone}`);
+                console.log(`Additional Requests: ${requests}`);
+                
+                // Clear the cart after purchase
+                localStorage.removeItem('cart');
+                
+                // Redirect to the Thank You page
+                window.location.href = 'thank-you.html'; // Make sure this path is correct
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+    }
+
+    // Add product to cart
     addToCartButtons.forEach(button => {
         button.addEventListener('click', event => {
             const productElement = event.target.closest('.product');
@@ -15,9 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Update cart display
     updateCartDisplay();
 });
 
+// Add product to cart
 function addToCart(product) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const existingItem = cart.find(item => item.id === product.id);
@@ -30,6 +91,12 @@ function addToCart(product) {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+// Clear the cart
+function clearCart() {
+    localStorage.removeItem('cart');
+}
+
+// Update cart display
 function updateCartDisplay() {
     const cartItemsContainer = document.querySelector('.cart-items');
     const subtotalElement = document.getElementById('subtotal');
@@ -37,10 +104,9 @@ function updateCartDisplay() {
     const totalElement = document.getElementById('total');
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
     cartItemsContainer.innerHTML = '';
+    
     let subtotal = 0;
-
     cart.forEach(item => {
         const cartItemElement = document.createElement('div');
         cartItemElement.classList.add('cart-item');
@@ -57,9 +123,8 @@ function updateCartDisplay() {
                 </div>
             </div>
         `;
-
+        
         cartItemsContainer.appendChild(cartItemElement);
-
         subtotal += item.price * item.quantity;
     });
 
@@ -69,34 +134,4 @@ function updateCartDisplay() {
     subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
     taxElement.textContent = `$${tax.toFixed(2)}`;
     totalElement.textContent = `$${total.toFixed(2)}`;
-
-    document.querySelectorAll('.quantity-decrease').forEach(button => {
-        button.addEventListener('click', event => {
-            const productDescription = event.target.closest('.cart-item').querySelector('.item-details p').textContent;
-            updateItemQuantity(productDescription, -1);
-        });
-    });
-
-    document.querySelectorAll('.quantity-increase').forEach(button => {
-        button.addEventListener('click', event => {
-            const productDescription = event.target.closest('.cart-item').querySelector('.item-details p').textContent;
-            updateItemQuantity(productDescription, 1);
-        });
-    });
-}
-
-function updateItemQuantity(description, change) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const itemIndex = cart.findIndex(item => item.description === description);
-
-    if (itemIndex !== -1) {
-        cart[itemIndex].quantity += change;
-
-        if (cart[itemIndex].quantity <= 0) {
-            cart.splice(itemIndex, 1);
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartDisplay();
-    }
 }

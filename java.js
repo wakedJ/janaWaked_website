@@ -46,4 +46,43 @@ document.addEventListener('DOMContentLoaded', function () {
             categories.classList.toggle('active');
         });
     }
+
+    //orders summary on thank you page
+    document.addEventListener('DOMContentLoaded', () => {
+        // Clear cart from local storage after displaying the order summary
+        localStorage.removeItem('cart');
+        
+        const orderDetailsContainer = document.getElementById('order-details');
+        const subtotalElement = document.getElementById('subtotal');
+        const taxElement = document.getElementById('tax');
+        const totalElement = document.getElementById('total');
+        
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Check if the cart is empty
+        if (cart.length === 0) {
+            orderDetailsContainer.innerHTML = '<tr><td colspan="4">Your cart is empty.</td></tr>';
+            return;
+        }
+        
+        let subtotal = 0;
+        cart.forEach(item => {
+            const orderItemElement = document.createElement('tr');
+            orderItemElement.innerHTML = `
+                <td>${item.description}</td>
+                <td>$${item.price.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td>$${(item.price * item.quantity).toFixed(2)}</td>
+            `;
+            orderDetailsContainer.appendChild(orderItemElement);
+            subtotal += item.price * item.quantity;
+        });
+        
+        const tax = subtotal * 0.10; // 10% tax
+        const total = subtotal + tax;
+        
+        subtotalElement.textContent = subtotal.toFixed(2);
+        taxElement.textContent = tax.toFixed(2);
+        totalElement.textContent = total.toFixed(2);
+    });
 });

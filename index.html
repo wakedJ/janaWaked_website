@@ -161,5 +161,14 @@
 <!--footer section ends-->
         
     <script src="java.js"></script>
+    <script>
+        if (localStorage.getItem("isLoggedIn") === "true") {
+    const userEmail = localStorage.getItem("userEmail");
+    document.getElementById("welcomeMessage").textContent = `Welcome, ${userEmail}!`;
+} else {
+    alert("Please log in to access this page.");
+    window.location.href = "login.html";
+}
+    </script>
 </body>
 </html>
