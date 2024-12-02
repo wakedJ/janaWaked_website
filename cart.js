@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (clearCartButton) {
         clearCartButton.addEventListener('click', () => {
             clearCart();
-            updateCartDisplay();
+            updateCartDisplay();   
         });
     }
 
@@ -67,8 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: productElement.querySelector('.description').textContent,
                 description: productElement.querySelector('.description').textContent,
                 price: parseFloat(productElement.querySelector('.price').textContent.replace('$', '')),
-                image: productElement.querySelector('.no-hand').src
-            };
+                image: productElement.querySelector('.no-hand') 
+                ? productElement.querySelector('.no-hand').src // If .no-hand exists
+                : productElement.querySelector('img').src // Use the first image as fallback
+        };
             addToCart(product);
             updateCartDisplay();
         });

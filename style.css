@@ -305,48 +305,114 @@ footer{
 
 /**************Contact Page****************/
 
-.contact-container{
+.contact-container {
     margin-top: 174px;
+    padding: 0 10px; /* Added padding to avoid content touching edges on smaller screens */
 }
-.headerNote{
+
+.headerNote {
     display: flex;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    justify-content: space-between;
 }
-#box{
+
+#box {
     height: 350px;
-    width: 520;
+    width: 100%; /* Make the box responsive */
+    max-width: 520px; /* Limit the width on larger screens */
 }
-.box1{
-    margin-left: 40px;
+
+.box1 {
+    margin-left: 20px;
     margin-right: 20px;
+    flex: 1; /* Allow it to take up available space */
 }
+
 .box2 {
     background-color: #800000;
     text-align: center;
     padding: 50px;
     margin-left: 20px;
-    margin-right    : 40px;
+    margin-right: 20px;
     color: white;
+    flex: 2; /* Allow box2 to take up more space */
+    min-width: 250px; /* Ensure it doesn't get too narrow on small screens */
 }
-.contact-methods{
+
+.contact-methods {
     display: grid;
-    grid-template-rows: auto auto; /* Two rows of auto height */
-    grid-template-columns: auto auto; /* Two columns of auto width */
-    gap: 10px; /* Gap between grid items */
-    margin-inline-start: 200px;
+    grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+    gap: 20px;
+    margin-inline-start: 10%; /* Adjust margin for better centering on small screens */
     margin-top: 50px;
 }
-.tit{
+
+.tit {
     display: flex;
     gap: 15px;
+    align-items: center; /* Vertically center icons and text */
 }
-.contact-container hr{
+
+.contact-container hr {
     width: 75%;
     height: 2px;
+    margin: 30px auto; /* Center the line */
 }
-.contact-methods a{
+
+.contact-methods a {
     color: goldenrod;
     text-decoration: none;
 }
+
+@media (max-width: 768px) {
+    .contact-methods {
+        grid-template-columns: 1fr; /* Stack items in a single column on smaller screens */
+        margin-inline-start: 0; /* Remove left margin */
+    }
+
+    .headerNote {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center the content */
+    }
+
+    .box1, .box2 {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%; /* Make both boxes full width */
+        max-width: none; /* Remove max-width to allow flexibility */
+    }
+
+    .box2 {
+        padding: 20px; /* Reduce padding on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-part {
+        padding: 0 10px; /* Add padding for smaller screens */
+    }
+
+    .header-part h4 {
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    .contact-methods {
+        gap: 10px; /* Reduce gap on very small screens */
+    }
+
+    .contact-methods h2 {
+        font-size: 18px; /* Adjust font size of headers */
+    }
+
+    .contact-methods h3 {
+        font-size: 14px; /* Adjust font size of descriptions */
+    }
+
+    .contact-methods h4 {
+        font-size: 14px; /* Adjust font size for contact links */
+    }
+}
+
 
 
 /*********************Products page******************/
