@@ -84,6 +84,24 @@ if ($QueryResult4) {
     echo "<p>Error creating 'order_items' table: " . mysqli_error($conn) . "</p>";
 }
 
+// Create products table
+$sql5 = "CREATE TABLE IF NOT EXISTS products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    stock_quantity INT NOT NULL,
+    image_url VARCHAR(255),
+    category VARCHAR(50)
+);";
+$QueryResult5 = mysqli_query($conn, $sql5);
+
+if ($QueryResult5) {
+    echo "<p>'products' table created or already exists.</p>";
+} else {
+    echo "<p>Error creating 'products' table: " . mysqli_error($conn) . "</p>";
+}
+
 // Closing the connection
 mysqli_close($conn);
 ?>
