@@ -88,13 +88,14 @@ if ($QueryResult4) {
 $sql5 = "CREATE TABLE IF NOT EXISTS products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    description TEXT,
+    description TEXT,  
     price DECIMAL(10, 2) NOT NULL,
     stock_quantity INT NOT NULL,
-    image_url VARCHAR(255),
-    category VARCHAR(50)
+    image_url VARCHAR(255), 
+    category VARCHAR(50)   
 );";
 $QueryResult5 = mysqli_query($conn, $sql5);
+
 
 if ($QueryResult5) {
     echo "<p>'products' table created or already exists.</p>";
