@@ -1,9 +1,8 @@
 <?php
-// Database connection settings
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'web_project'); // Add this line to define the database name
+define('DB_NAME', 'web_project'); 
 
 // Create connection
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS);

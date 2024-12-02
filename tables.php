@@ -1,5 +1,4 @@
 <?php
-// Include the config.php to use constants
 include 'config.php';
 
 // Create the connection to the database
@@ -9,9 +8,9 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-echo "<p>Successfully connected to the database. Let's start creating tables...</p>";
+echo "<p>Successfully connected to the database.</p>";
 
-// Create 'users' table
+// Create users table
 $sql1 = "CREATE TABLE IF NOT EXISTS users (
     id INT(11) NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -28,7 +27,7 @@ if ($QueryResult1) {
     echo "<p>Error creating 'users' table: " . mysqli_error($conn) . "</p>";
 }
 
-// Create 'design_requests' table
+// Create design_requests table
 $sql2 = "CREATE TABLE IF NOT EXISTS design_requests (
     id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     jewelry_type VARCHAR(50) NOT NULL,
@@ -47,7 +46,7 @@ if ($QueryResult2) {
     echo "<p>Error creating 'design_requests' table: " . mysqli_error($conn) . "</p>";
 }
 
-// Create 'orders' table
+// Create orders table
 $sql3 = "CREATE TABLE IF NOT EXISTS orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL, 
@@ -67,7 +66,7 @@ if ($QueryResult3) {
     echo "<p>Error creating 'orders' table: " . mysqli_error($conn) . "</p>";
 }
 
-// Create 'order_items' table
+// Create order_items table
 $sql4 = "CREATE TABLE IF NOT EXISTS order_items (
     order_item_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT,  
