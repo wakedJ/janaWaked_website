@@ -11,7 +11,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Create the 'web_project' database
+// Create the web_project database
 $sql = "CREATE DATABASE IF NOT EXISTS " . DB_NAME;
 if (mysqli_query($conn, $sql)) {
     echo "Database 'web_project' created or already exists.";
